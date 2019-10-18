@@ -6,19 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
 
-class SwipeHelper: View.OnTouchListener {
-
-
-    companion object{
-
-        private lateinit var mSwipeStack: SwipeStack
-
-        fun SwipeHelper(swipeStack: SwipeStack){
-            mSwipeStack = swipeStack
-        }
-
-    }
-
+class SwipeHelper(private val mSwipeStack: SwipeStack): View.OnTouchListener {
 
     private var mObservedView: View? = null
 
@@ -33,9 +21,6 @@ class SwipeHelper: View.OnTouchListener {
     private var mOpacityEnd = SwipeStack.DEFAULT_SWIPE_OPACITY
     private var mAnimationDuration = SwipeStack.DEFAULT_ANIMATION_DURATION
 
-    fun SwipeHelper(swipeStack: SwipeStack) {
-        mSwipeStack = swipeStack
-    }
 
     override fun onTouch(v: View, event: MotionEvent): Boolean {
 

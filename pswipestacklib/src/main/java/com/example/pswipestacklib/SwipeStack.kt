@@ -12,7 +12,8 @@ import android.widget.Adapter
 import android.widget.FrameLayout
 import java.util.*
 
-class SwipeStack(context: Context) : ViewGroup(context) {
+class SwipeStack @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    ViewGroup(context, attrs, defStyleAttr)  {
 
 
     companion object{
@@ -54,19 +55,11 @@ class SwipeStack(context: Context) : ViewGroup(context) {
         var mProgressListener: SwipeProgressListener? = null
     }
 
-    fun SwipeStack(context: Context): SwipeStack {
-       return SwipeStack(context, null)
-    }
-
-    fun SwipeStack(context: Context, attrs: AttributeSet?): SwipeStack {
-       return SwipeStack(context, attrs, 0)
-    }
-
-    fun SwipeStack(context: Context, attrs: AttributeSet?, defStyleAttr: Int): SwipeStack {
-        return SwipeStack(context, attrs, defStyleAttr)
+    init {
         readAttributes(attrs)
         initialize()
     }
+
 
     private fun readAttributes(attributeSet: AttributeSet?) {
         val attrs = context.obtainStyledAttributes(attributeSet, R.styleable.SwipeStack)
@@ -104,7 +97,7 @@ class SwipeStack(context: Context) : ViewGroup(context) {
         clipToPadding = false
         clipChildren = false
 
-        mSwipeHelper = SwipeHelper()
+        mSwipeHelper = SwipeHelper(this)
         mSwipeHelper!!.setAnimationDuration(mAnimationDuration)
         mSwipeHelper!!.setRotation(mSwipeRotation)
         mSwipeHelper!!.setOpacityEnd(mSwipeOpacity)
